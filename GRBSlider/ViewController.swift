@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet var viewToColor: UIView!
     
@@ -15,33 +15,56 @@ class ViewController: UIViewController {
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
     
-    var redValue: Float = 0.0
-    var greenValue: Float = 0.0
-    var blueValue: Float = 0.0
+    @IBOutlet var redSlider: UISlider!
+    @IBOutlet var greenSlider: UISlider!
+    @IBOutlet var blueSlider: UISlider!
+    
+    private var redValue: Float = 0.5
+    private var greenValue: Float = 0.5
+    private var blueValue: Float = 0.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        changingViewColorComponent()
+        
+        redSlider.setValue(redValue, animated: false)
+        greenSlider.setValue(greenValue, animated: false)
+        blueSlider.setValue(greenValue, animated: false)
+        
+        redValueLabel.text = String(redValue)
+        greenValueLabel.text = String(greenValue)
+        blueValueLabel.text = String(blueValue)
     }
+    
 
     @IBAction func redSliding(_ sender: UISlider) {
         redValue = sender.value
-        redValueLabel.text = String(format: "%.2f", sender.value)
+        redValueLabel.text = String(
+            format: "%.2f",
+            sender.value
+        )
         changingViewColorComponent()
     }
     
     @IBAction func greenSliding(_ sender: UISlider) {
         greenValue = sender.value
-        greenValueLabel.text = String(format: "%.2f", sender.value)
+        greenValueLabel.text = String(
+            format: "%.2f",
+            sender.value
+        )
         changingViewColorComponent()
     }
     
     @IBAction func blueSliding(_ sender: UISlider) {
         blueValue = sender.value
-        blueValueLabel.text = String(format: "%.2f", sender.value)
-        changingViewColorComponent()
-    }
+        blueValueLabel.text = String(
+            format: "%.2f",
+            sender.value
+        )
+        changingViewColorComponent()    }
     
-    func changingViewColorComponent() {
+    private func changingViewColorComponent() {
         viewToColor.backgroundColor = UIColor(
             red: CGFloat(redValue),
             green: CGFloat(greenValue),
@@ -49,6 +72,5 @@ class ViewController: UIViewController {
             alpha: 1
         )
     }
-
 }
 
